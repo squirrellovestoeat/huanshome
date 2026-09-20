@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>歡歡｜社群企劃</title>
+    <meta
+      name="description"
+      content="歡歡是社群企劃，專長將複雜議題轉成簡單、有趣、好理解的互動式內容與社群敘事。"
+    />
+    <style>
+      :root {
+        --bg: #f5f1ec;
+        --panel: #fffdf9;
+        --panel-2: #f0e8df;
+        --ink: #1b1b1b;
+        --muted: #53514d;
+        --line: rgba(27, 27, 27, 0.8);
+        --pink: #e8c7c0;
+        --pink-soft: #f6e2dc;
+        --sage: #d7e2d3;
+        --beige: #e8dcc9;
+        --olive: #5f6549;
+        --shadow: 0 0 0 1.5px rgba(27, 27, 27, 0.8);
+        --radius-xl: 36px;
+        --radius-lg: 24px;
+        --radius-md: 18px;
+        --max-width: 1200px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Segoe UI", "PingFang TC", "Noto Sans TC", Arial, sans-serif;
+        line-height: 1.6;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      .container {
+        width: min(var(--max-width), calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: blur(8px);
+        background: rgba(245, 241, 236, 0.84);
+        border-bottom: 1.5px solid rgba(27, 27, 27, 0.22);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 76px;
+        gap: 16px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.92rem;
+      }
+
+      .brand-mark {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--pink-soft);
+        border: 2px solid var(--line);
+        display: grid;
+        place-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .brand-mark::before,
+      .brand-mark::after {
+        content: "";
+        position: absolute;
+        border: 2px solid var(--ink);
+        border-radius: 50%;
+      }
+
+      .brand-mark::before {
+        width: 16px;
+        height: 16px;
+        top: 8px;
+        left: 8px;
+      }
+
+      .brand-mark::after {
+        width: 6px;
+        height: 6px;
+        background: var(--ink);
+        border: none;
+        top: 15px;
+        left: 15px;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        font-size: 0.95rem;
+      }
+
+      .nav-link {
+        position: relative;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 100%;
+        height: 2px;
+        background: var(--ink);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.2s ease;
+      }
+
+      .nav-link:hover::after,
+      .nav-link:focus-visible::after {
+        transform: scaleX(1);
+      }
+
+      .cta-button,
+      .button-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 0 22px;
+        border-radius: 999px;
+        border: 2px solid var(--line);
+        font-weight: 700;
+        transition: transform 0.2s ease, background 0.2s ease;
+        cursor: pointer;
+      }
+
+      .cta-button {
+        background: var(--ink);
+        color: #fff;
+      }
+
+      .button-secondary {
+        background: transparent;
+        color: var(--ink);
+      }
+
+      .cta-button:hover,
+      .button-secondary:hover {
+        transform: translateY(-1px);
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+
+      .hero {
+        padding: 56px 0 52px;
+      }
+
+      .hero-wrap {
+        display: grid;
+        grid-template-columns: 1.12fr 0.88fr;
+        gap: 28px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.35);
+        border: 1.5px solid var(--line);
+        font-size: 0.82rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--sage);
+        border: 1.5px solid var(--line);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      p {
+        margin: 0;
+      }
+
+      .hero-copy h1 {
+        margin-top: 20px;
+        font-size: clamp(3rem, 5vw, 6rem);
+        line-height: 0.93;
+        letter-spacing: -0.065em;
+        font-weight: 900;
+      }
+
+      .hero-copy h1 .highlight {
+        display: inline-block;
+        padding: 0 0.1em 0.03em;
+        background: linear-gradient(180deg, transparent 0 60%, rgba(232, 199, 192, 0.78) 60% 100%);
+      }
+
+      .hero-copy .subhead {
+        margin-top: 22px;
+        max-width: 600px;
+        font-size: 1.12rem;
+        color: var(--muted);
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 28px;
+      }
+
+      .showcase-row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 28px;
+      }
+
+      .showcase-card {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 14px;
+        border: 2px solid var(--line);
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .showcase-card.feature {
+        background: var(--pink-soft);
+      }
+
+      .thumb {
+        width: 100%;
+        height: 220px;
+        border-radius: 18px;
+        border: 2px solid var(--line);
+        overflow: hidden;
+        background: #fff;
+      }
+
+      .thumb img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: contain;
+        background: #f8f5f2;
+      }
+
+      .card-copy {
+        min-width: 0;
+        padding: 0 4px 4px;
+      }
+
+      .card-copy span {
+        display: block;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        font-weight: 800;
+      }
+
+      .card-copy strong {
+        display: block;
+        margin-top: 4px;
+        font-size: 1.02rem;
+        line-height: 1.2;
+        letter-spacing: -0.04em;
+      }
+
+      .mini-proof {
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .mini-proof .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 999px;
+        padding: 10px 14px;
+        border: 1.5px solid var(--line);
+        background: rgba(255, 255, 255, 0.2);
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .mini-proof .pill .dot {
+        width: 10px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: var(--olive);
+        border: 1.5px solid var(--line);
+      }
+
+      .hero-visual {
+        position: relative;
+      }
+
+      .visual-card {
+        position: relative;
+        background: var(--panel);
+        border-radius: var(--radius-xl);
+        border: 2px solid var(--line);
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+        overflow: hidden;
+      }
+
+      .visual-main {
+        padding: 22px;
+        min-height: 480px;
+      }
+
+      .visual-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1.5px solid var(--line);
+        padding-bottom: 14px;
+        margin-bottom: 18px;
+      }
+
+      .signal {
+        display: flex;
+        gap: 9px;
+      }
+
+      .signal span {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: var(--panel-2);
+        border: 1.5px solid var(--line);
+      }
+
+      .label {
+        display: inline-flex;
+        padding: 8px 10px;
+        border-radius: 999px;
+        border: 1.5px solid var(--line);
+        background: var(--pink-soft);
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .visual-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+
+      .story-block {
+        background: var(--panel-2);
+        border-radius: 24px;
+        border: 2px solid var(--line);
+        padding: 18px 16px;
+        min-height: 160px;
+      }
+
+      .story-block:nth-child(2) {
+        background: #efe6d7;
+      }
+
+      .story-block:nth-child(3) {
+        grid-column: 1 / -1;
+        background: #f0e9e5;
+      }
+
+      .story-tag {
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 800;
+        color: var(--muted);
+      }
+
+      .story-title {
+        margin-top: 10px;
+        font-size: clamp(1.4rem, 2vw, 2.1rem);
+        line-height: 1.05;
+        letter-spacing: -0.05em;
+      }
+
+      .story-stats {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        margin-top: 20px;
+      }
+
+      .story-stats strong {
+        display: block;
+        font-size: 2rem;
+        letter-spacing: -0.08em;
+      }
+
+      .story-stats span {
+        font-size: 0.72rem;
+        color: var(--muted);
+      }
+
+      .small-badge {
+        position: absolute;
+        right: 18px;
+        bottom: 18px;
+        padding: 12px 16px;
+        border-radius: 18px;
+        border: 2px solid var(--line);
+        background: var(--sage);
+        font-size: 0.82rem;
+        font-weight: 800;
+        transform: rotate(2deg);
+      }
+
+      .section {
+        padding: 52px 0;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 28px;
+      }
+
+      .section-head h2 {
+        font-size: clamp(2.1rem, 4vw, 4rem);
+        line-height: 0.96;
+        letter-spacing: -0.06em;
+      }
+
+      .section-head p {
+        max-width: 540px;
+        color: var(--muted);
+        font-size: 1.02rem;
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1.08fr 0.92fr;
+        gap: 24px;
+      }
+
+      .about-card,
+      .card,
+      .case-card,
+      .contact-card {
+        background: rgba(255, 255, 255, 0.22);
+        border: 2px solid var(--line);
+        border-radius: var(--radius-lg);
+      }
+
+      .about-card {
+        padding: 28px;
+      }
+
+      .about-card p {
+        font-size: 1.04rem;
+        color: var(--muted);
+      }
+
+      .about-card .lead {
+        font-size: 1.3rem;
+        line-height: 1.5;
+        color: var(--ink);
+        margin-bottom: 18px;
+      }
+
+      .about-points {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 26px;
+      }
+
+      .point {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 14px;
+        border: 1.5px solid var(--line);
+        border-radius: 16px;
+        background: rgba(255,255,255,0.28);
+      }
+
+      .point-emoji {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        background: var(--pink-soft);
+        border: 1.5px solid var(--line);
+        font-size: 1.35rem;
+      }
+
+      .point strong {
+        display: block;
+        font-size: 1rem;
+        margin-bottom: 2px;
+      }
+
+      .point span {
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+
+      .profile-box {
+        position: relative;
+        background: linear-gradient(135deg, #efe6de 0%, #f5f1ec 100%);
+        border: 2px solid var(--line);
+        border-radius: var(--radius-xl);
+        min-height: 320px;
+        overflow: hidden;
+        padding: 24px;
+      }
+
+      .profile-box .stamp {
+        display: inline-block;
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1.5px solid var(--line);
+        background: var(--sage);
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .profile-figure {
+        position: absolute;
+        right: 18px;
+        bottom: 12px;
+        width: 220px;
+        height: 250px;
+      }
+
+      .profile-figure .head {
+        position: absolute;
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        background: var(--beige);
+        border: 2px solid var(--line);
+        left: 52px;
+        top: 8px;
+      }
+
+      .profile-figure .head::before {
+        content: "";
+        position: absolute;
+        left: 22px;
+        right: 22px;
+        top: 38px;
+        height: 18px;
+        border-radius: 50%;
+        border-top: 2px solid var(--line);
+      }
+
+      .profile-figure .head::after {
+        content: "";
+        position: absolute;
+        left: 28px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #fff;
+        border: 2px solid var(--line);
+        top: 35px;
+        box-shadow: 38px 0 0 #fff;
+      }
+
+      .profile-figure .body {
+        position: absolute;
+        width: 160px;
+        height: 130px;
+        background: var(--pink-soft);
+        border: 2px solid var(--line);
+        border-radius: 28px 28px 18px 18px;
+        left: 30px;
+        bottom: 22px;
+      }
+
+      .profile-figure .arm,
+      .profile-figure .arm::before {
+        content: "";
+        position: absolute;
+        width: 22px;
+        height: 88px;
+        border-radius: 18px;
+        border: 2px solid var(--line);
+        background: var(--beige);
+        top: 110px;
+      }
+
+      .profile-figure .arm {
+        left: 18px;
+        transform: rotate(15deg);
+      }
+
+      .profile-figure .arm::before {
+        left: 118px;
+        transform: rotate(-30deg);
+      }
+
+      .profile-box .quote {
+        position: absolute;
+        left: 22px;
+        bottom: 26px;
+        width: 160px;
+        font-size: 1.05rem;
+        line-height: 1.4;
+        font-weight: 800;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+      }
+
+      .service-card {
+        position: relative;
+        padding: 26px 22px 24px;
+        overflow: hidden;
+      }
+
+      .service-card:nth-child(1) {
+        background: #f5e5e1;
+      }
+
+      .service-card:nth-child(2) {
+        background: #edf0e2;
+      }
+
+      .service-card:nth-child(3) {
+        background: #f2eadf;
+      }
+
+      .service-badge {
+        display: inline-flex;
+        padding: 7px 11px;
+        border-radius: 999px;
+        border: 1.5px solid var(--line);
+        background: rgba(255,255,255,0.25);
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 800;
+      }
+
+      .service-card h3 {
+        margin-top: 18px;
+        font-size: clamp(1.7rem, 2vw, 2.4rem);
+        line-height: 1.02;
+        letter-spacing: -0.06em;
+      }
+
+      .service-card p {
+        margin-top: 16px;
+        color: var(--muted);
+      }
+
+      .service-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 18px 0 0;
+        display: grid;
+        gap: 10px;
+      }
+
+      .service-card li {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.95rem;
+      }
+
+      .service-card li::before {
+        content: "";
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--ink);
+        border: 2px solid var(--line);
+      }
+
+      .service-icon {
+        position: absolute;
+        right: 14px;
+        top: 14px;
+        width: 58px;
+        height: 58px;
+        border-radius: 20px;
+        border: 2px solid var(--line);
+        background: rgba(255,255,255,0.38);
+        display: grid;
+        place-items: center;
+        font-size: 1.6rem;
+      }
+
+      .process-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .process-step {
+        position: relative;
+        padding: 24px 20px 18px;
+        background: rgba(255,255,255,0.24);
+        border: 2px solid var(--line);
+        border-radius: 24px;
+      }
+
+      .step-number {
+        font-size: 2.2rem;
+        font-weight: 900;
+        letter-spacing: -0.08em;
+        color: var(--olive);
+      }
+
+      .process-step h3 {
+        margin-top: 12px;
+        font-size: 1.2rem;
+        letter-spacing: -0.04em;
+      }
+
+      .process-step p {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .trust-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 22px;
+      }
+
+      .client-list {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .client-pill {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 88px;
+        padding: 16px 12px;
+        border: 1.5px solid var(--line);
+        border-radius: 16px;
+        background: rgba(255,255,255,0.18);
+        text-align: center;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+      }
+
+      .case-panel {
+        padding: 20px;
+      }
+
+      .case-card {
+        padding: 18px 18px 12px;
+        background: rgba(255,255,255,0.18);
+        margin-bottom: 14px;
+      }
+
+      .case-card:last-child {
+        margin-bottom: 0;
+      }
+
+      .case-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 12px;
+        color: var(--muted);
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .case-card h4 {
+        font-size: 1.5rem;
+        line-height: 1.08;
+        letter-spacing: -0.05em;
+      }
+
+      .case-card p {
+        margin-top: 14px;
+        color: var(--muted);
+      }
+
+      .case-tag {
+        display: inline-block;
+        margin-top: 14px;
+        padding: 8px 10px;
+        border-radius: 999px;
+        border: 1.5px solid var(--line);
+        background: var(--pink-soft);
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .contact-wrap {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 22px;
+      }
+
+      .contact-card {
+        padding: 28px;
+      }
+
+      .contact-card h3 {
+        font-size: clamp(2.2rem, 3vw, 3.2rem);
+        line-height: 0.98;
+        letter-spacing: -0.06em;
+      }
+
+      .contact-card p {
+        margin-top: 16px;
+        color: var(--muted);
+        max-width: 560px;
+      }
+
+      .contact-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 22px;
+      }
+
+      .contact-list {
+        display: grid;
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 14px 16px;
+        border: 1.5px solid var(--line);
+        border-radius: 18px;
+        background: rgba(255,255,255,0.24);
+      }
+
+      .contact-item strong {
+        display: block;
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .contact-item a {
+        font-weight: 800;
+        font-size: 1.05rem;
+      }
+
+      .footer {
+        padding: 18px 0 42px;
+      }
+
+      .footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        border-top: 2px solid rgba(27, 27, 27, 0.28);
+        padding-top: 22px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .doodle {
+        position: absolute;
+        pointer-events: none;
+      }
+
+      .doodle.line-1 {
+        width: 130px;
+        height: 130px;
+        border: 2px solid var(--line);
+        border-color: var(--line);
+        border-left: none;
+        border-top: none;
+        border-radius: 50%;
+        right: -12px;
+        top: 20px;
+      }
+
+      .doodle.line-2 {
+        width: 110px;
+        height: 110px;
+        border: 2px solid var(--line);
+        border-radius: 50%;
+        left: -10px;
+        bottom: 20px;
+      }
+
+      @media (max-width: 980px) {
+        .hero-wrap,
+        .about-grid,
+        .trust-grid,
+        .contact-wrap {
+          grid-template-columns: 1fr;
+        }
+
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .process-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 760px) {
+        .nav {
+          position: relative;
+          min-height: 64px;
+        }
+
+        .menu-toggle {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          border: 2px solid var(--line);
+          background: rgba(255,255,255,0.16);
+          cursor: pointer;
+        }
+
+        .menu-toggle span,
+        .menu-toggle span::before,
+        .menu-toggle span::after {
+          position: relative;
+          display: block;
+          width: 18px;
+          height: 2px;
+          background: var(--ink);
+          border-radius: 2px;
+        }
+
+        .menu-toggle span::before,
+        .menu-toggle span::after {
+          content: "";
+          position: absolute;
+          left: 0;
+        }
+
+        .menu-toggle span::before {
+          top: -6px;
+        }
+
+        .menu-toggle span::after {
+          top: 6px;
+        }
+
+        .nav-links {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: calc(100% + 10px);
+          display: none;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+          padding: 18px 14px 16px;
+          border: 2px solid var(--line);
+          border-radius: 18px;
+          background: rgba(255, 253, 249, 0.96);
+        }
+
+        .nav-links.open {
+          display: flex;
+        }
+
+        .nav-cta {
+          display: none;
+        }
+
+        .hero {
+          padding-top: 28px;
+        }
+
+        .section-head {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .hero-copy h1 {
+          font-size: clamp(2.6rem, 16vw, 4.2rem);
+        }
+
+        .mini-proof {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .about-points,
+        .client-list,
+        .process-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .contact-item {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .footer-inner {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container nav">
+        <a class="brand" href="#top" aria-label="歡歡首頁">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>歡歡</span>
+        </a>
+
+        <nav class="nav-links" aria-label="主導覽">
+          <a class="nav-link" href="#about">About</a>
+          <a class="nav-link" href="#service">Service</a>
+          <a class="nav-link" href="#process">Process</a>
+          <a class="nav-link" href="#trust">Trust</a>
+          <a class="nav-link" href="#contact">Contact</a>
+        </nav>
+
+        <div class="nav-cta">
+          <a class="cta-button" href="#contact">立即洽談</a>
+        </div>
+
+        <button class="menu-toggle" aria-label="開啟選單" aria-expanded="false">
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-wrap">
+          <div class="hero-copy">
+            <div class="eyebrow">社群企劃 × 資訊設計</div>
+            <h1>
+              讓複雜議題，<span class="highlight">變成大家想點開</span>
+              的內容。
+            </h1>
+            <p class="subhead">
+              我是歡歡，專門把艱澀議題轉成能被理解、願意分享、又不失說服力的社群內容與互動體驗。
+              不是單方面灌輸，而是找到受眾真正關心的切入點，讓溝通從「被動接收」變成「主動理解」與「雙向共鳴」。
+            </p>
+            <div class="hero-actions">
+              <a class="cta-button" href="#service">看我怎麼做</a>
+              <a class="button-secondary" href="#contact">聯絡歡歡</a>
+            </div>
+
+            <div class="showcase-row" aria-label="作品展示">
+              <div class="showcase-card feature">
+                <div class="thumb" aria-hidden="true">
+                  <img src="assets/project-2.png" alt="青春網戀模擬器作品圖" />
+                </div>
+                <div class="card-copy">
+                  <span>Featured</span>
+                  <strong>青春網戀模擬器</strong>
+                </div>
+              </div>
+
+              <div class="showcase-card">
+                <div class="thumb" aria-hidden="true">
+                  <img src="assets/project-1.png" alt="彰化百寶圖鑑作品圖" />
+                </div>
+                <div class="card-copy">
+                  <span>Campaign</span>
+                  <strong>彰化百寶圖鑑</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="mini-proof">
+              <div class="pill"><span class="dot"></span> 內容設計 × 數位敘事</div>
+              <div class="pill"><span class="dot"></span> 互動式網頁 / 影片腳本</div>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-label="工作成果視覺卡片">
+            <div class="visual-card">
+              <div class="visual-main">
+                <div class="visual-top">
+                  <div class="signal" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <span class="label">brainstorm</span>
+                </div>
+
+                <div class="visual-grid">
+                  <div class="story-block">
+                    <div class="story-tag">Audience</div>
+                    <div class="story-title">誰真的會點開？</div>
+                    <div class="story-stats">
+                      <div>
+                        <strong>73%</strong>
+                        <span>想理解</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="story-block">
+                    <div class="story-tag">Story</div>
+                    <div class="story-title">從理解到分享</div>
+                    <div class="story-stats">
+                      <div>
+                        <strong>2x</strong>
+                        <span>互動轉化</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="story-block">
+                    <div class="story-tag">Impact</div>
+                    <div class="story-title">讓議題從硬到好玩</div>
+                    <div class="story-stats">
+                      <div>
+                        <strong>1版</strong>
+                        <span>敘事策略</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="small-badge">好玩 × 有效 × 可分享</div>
+              <div class="doodle line-1" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="container">
+          <div class="section-head">
+            <h2>我的工作，不只是說故事。</h2>
+            <p>
+              我協助品牌與組織，把複雜訊息變成能被理解、願意點開、也樂於分享的內容載體，讓議題從枯燥轉成有感的體驗。
+            </p>
+          </div>
+
+          <div class="about-grid">
+            <div class="about-card">
+              <p class="lead">
+                我相信內容的力量，不在於把資訊完整塞進受眾腦袋裡，而在於讓人願意理解、願意回應、願意轉發。
+              </p>
+              <p>
+                受眾不會因為議題重要就主動拆解資訊，很多時候真正影響傳播效果的，是切入點是否貼近生活、是否有趣、是否容易理解，以及內容是否提供值得參與的體驗。
+              </p>
+
+              <div class="about-points">
+                <div class="point">
+                  <div class="point-emoji">🎯</div>
+                  <div>
+                    <strong>鎖定人群</strong>
+                    <span>先看目標受眾真正關心什麼</span>
+                  </div>
+                </div>
+
+                <div class="point">
+                  <div class="point-emoji">🧩</div>
+                  <div>
+                    <strong>轉化資訊</strong>
+                    <span>將抽象內容做結構化設計</span>
+                  </div>
+                </div>
+
+                <div class="point">
+                  <div class="point-emoji">✨</div>
+                  <div>
+                    <strong>增加體驗</strong>
+                    <span>用互動讓理解變得自然好玩</span>
+                  </div>
+                </div>
+
+                <div class="point">
+                  <div class="point-emoji">🔁</div>
+                  <div>
+                    <strong>形成分享</strong>
+                    <span>讓內容有被主動轉發的理由</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-box" aria-label="個人特質介紹">
+              <span class="stamp">creative strategist</span>
+              <div class="profile-figure" aria-hidden="true">
+                <div class="head"></div>
+                <div class="arm"></div>
+                <div class="body"></div>
+              </div>
+              <div class="quote">
+                把議題變成有趣、好理解、值得分享的互動內容。
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="service">
+        <div class="container">
+          <div class="section-head">
+            <h2>服務內容</h2>
+            <p>
+              從議題拆解，到好內容設計，我協助你把複雜訊息轉成對目標受眾有價值、好接收、願意傳遞的內容形式。
+            </p>
+          </div>
+
+          <div class="services-grid">
+            <article class="service-card card">
+              <div class="service-icon" aria-hidden="true">🧪</div>
+              <div class="service-badge">Interactive</div>
+              <h3>互動式網站</h3>
+              <p>
+                小遊戲、心理測驗、互動頁面與簡易資訊導覽，讓受眾在參與中自然理解重點。
+              </p>
+              <ul>
+                <li>互動情境頁面設計</li>
+                <li>社群導流型小遊戲</li>
+                <li>議題教育型體驗頁面</li>
+              </ul>
+            </article>
+
+            <article class="service-card card">
+              <div class="service-icon" aria-hidden="true">🎬</div>
+              <div class="service-badge">Video</div>
+              <h3>解釋型影片腳本</h3>
+              <p>
+                讓議題不再像長篇說明，而是能靠敘事節奏把注意力抓住，從「聽完」變成「想分享」。
+              </p>
+              <ul>
+                <li>社群影片腳本</li>
+                <li>說明型短影音敘事設計</li>
+                <li>品牌議題影片主軸</li>
+              </ul>
+            </article>
+
+            <article class="service-card card">
+              <div class="service-icon" aria-hidden="true">📣</div>
+              <div class="service-badge">Campaign</div>
+              <h3>社群內容策略</h3>
+              <p>
+                依照受眾習慣與議題性質，找到最有機會被理解、被轉發的內容切入點與傳播節奏。
+              </p>
+              <ul>
+                <li>內容主軸與話題設計</li>
+                <li>社群貼文傳播框架</li>
+                <li>資訊設計與視覺語言</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="process">
+        <div class="container">
+          <div class="section-head">
+            <h2>我的流程</h2>
+            <p>
+              從議題理解，到內容落地，我將問題拆成可執行的設計步驟，讓每一份內容都更貼近受眾、更有效傳導訊息。
+            </p>
+          </div>
+
+          <div class="process-grid">
+            <article class="process-step">
+              <div class="step-number">01</div>
+              <h3>釐清議題核心</h3>
+              <p>先拆解目標訊息、受眾特徵與溝通限制，確認真正需要被理解的重點是什麼。</p>
+            </article>
+
+            <article class="process-step">
+              <div class="step-number">02</div>
+              <h3>找出切入點</h3>
+              <p>從受眾日常、興趣、情境與價值觀中找出貼近他們的入口，避免內容一開始就被忽略。</p>
+            </article>
+
+            <article class="process-step">
+              <div class="step-number">03</div>
+              <h3>轉換為體驗</h3>
+              <p>透過資訊設計、互動形式與敘事節奏，讓複雜訊息成為容易吸收、自然理解的內容形式。</p>
+            </article>
+
+            <article class="process-step">
+              <div class="step-number">04</div>
+              <h3>創造分享動機</h3>
+              <p>不是把觀念塞給受眾，而是讓他們在了解後感到有幫助、好玩、值得轉發，形成互動與傳播。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="trust">
+        <div class="container">
+          <div class="section-head">
+            <h2>信任與實績</h2>
+            <p>
+              從文化、設計、公共議題到科技品牌，我協助客戶把專業內容轉成具體、可被大眾理解與接收的敘事體驗。
+            </p>
+          </div>
+
+          <div class="trust-grid">
+            <div class="about-card">
+              <div class="client-list" aria-label="合作品牌列表">
+                <div class="client-pill">台灣文博會</div>
+                <div class="client-pill">台灣設計展</div>
+                <div class="client-pill">公視青春發言人</div>
+                <div class="client-pill">台積電</div>
+                <div class="client-pill">LINE</div>
+                <div class="client-pill">foodpanda</div>
+                <div class="client-pill">金馬60</div>
+                <div class="client-pill">國泰世華</div>
+                <div class="client-pill">品牌合作</div>
+              </div>
+            </div>
+
+            <div class="case-panel about-card">
+              <div class="case-card">
+                <div class="case-meta">
+                  <span>獲獎案例</span>
+                  <span>2024</span>
+                </div>
+                <h4>圈內人集合！測測你的隱藏屬性！</h4>
+                <p>台灣設計展社群行銷中的心理測驗，讓抽象的設計議題轉成可玩、可分享的自我認識體驗。</p>
+                <span class="case-tag">心理測驗</span>
+              </div>
+
+              <div class="case-card">
+                <div class="case-meta">
+                  <span>數位互動</span>
+                  <span>2025</span>
+                </div>
+                <h4>青春網戀模擬器</h4>
+                <p>公視青春發言人專案，以互動式頁面把青春議題重新包裝成有趣又有共鳴的體驗。</p>
+                <span class="case-tag">互動遊戲</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="container contact-wrap">
+          <div class="contact-card">
+            <div class="eyebrow">Let’s talk</div>
+            <h3>想把複雜議題，變成大家願意點進去的內容嗎？</h3>
+            <p>
+              無論是品牌的議題宣傳、社群內容的導流設計，或是互動式頁面與影片腳本的構思，我都可以協助你把關鍵資訊轉成更親近、更好理解、更值得分享的內容形式。
+            </p>
+            <div class="contact-actions">
+              <a class="cta-button" href="mailto:huanhuan@alltheway.tw">Email Me</a>
+              <a class="button-secondary" href="https://line.me/" target="_blank" rel="noreferrer">LINE 0916854455</a>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-list">
+              <div class="contact-item">
+                <div>
+                  <strong>Email</strong>
+                  <a href="mailto:huanhuan@alltheway.tw">huanhuan@alltheway.tw</a>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div>
+                  <strong>LINE</strong>
+                  <a href="https://line.me/" target="_blank" rel="noreferrer">0916854455</a>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div>
+                  <strong>Service</strong>
+                  <span>社群企劃／互動內容／敘事策略</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div>© <span id="year"></span> 歡歡 ｜ 社群企劃</div>
+        <div>讓複雜議題，變成有趣與有意義的內容。</div>
+      </div>
+    </footer>
+
+    <script>
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navLinks = document.querySelector('.nav-links');
+
+      if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+          const isOpen = navLinks.classList.toggle('open');
+          menuToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        navLinks.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => {
+            navLinks.classList.remove('open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
